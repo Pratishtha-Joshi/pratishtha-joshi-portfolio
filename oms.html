@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Order Management System | Pratishtha Joshi</title>
+<meta name="description" content="Pratishtha Joshi, Product Designer. Case studies in enterprise logistics, AI document processing and consumer apps.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@400;500&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#000}
+a{color:#2ef2c6}a:hover{color:#8ffbe2}
+.pj{position:relative;background:#000;color:#f4f4f4;font-family:Inter,system-ui,sans-serif;overflow-x:clip;-webkit-font-smoothing:antialiased}
+.pj *{box-sizing:border-box}
+.pj button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+.disp{font-family:'Space Grotesk',Inter,sans-serif}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.eyebrow{font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:#2ef2c6;font-weight:500}
+.cur-glow{position:fixed;left:0;top:0;width:900px;height:900px;margin:-450px 0 0 -450px;border-radius:50%;pointer-events:none;z-index:40;mix-blend-mode:screen;background:radial-gradient(circle,rgba(28,190,150,.20) 0%,rgba(20,140,120,.09) 32%,rgba(0,0,0,0) 62%);will-change:transform}
+.cur-tint{position:fixed;left:0;top:0;width:360px;height:360px;margin:-180px 0 0 -180px;border-radius:50%;pointer-events:none;z-index:41;mix-blend-mode:multiply;background:radial-gradient(circle,#bff7e8 0%,#e4fcf5 35%,#fff 70%);will-change:transform}
+.hdr{position:fixed;top:14px;left:50%;transform:translateX(-50%);width:calc(100% - 48px);max-width:1400px;z-index:70;display:flex;justify-content:space-between;align-items:center;padding:10px 14px 10px 24px;background:rgba(16,18,18,.55);-webkit-backdrop-filter:blur(18px) saturate(160%);backdrop-filter:blur(18px) saturate(160%);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:0 10px 40px -12px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.06);transition:background .4s,border-color .4s}
+.hdr:hover{background:rgba(16,18,18,.7);border-color:rgba(46,242,198,.18)}
+.hdr .menu-btn,.hdr .back{padding:0 10px}
+.hdr>*{pointer-events:auto}
+.logo{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:.18em;font-size:17px;color:#fff;text-decoration:none}
+.logo span{color:#2ef2c6}
+.back{display:inline-flex;align-items:center;gap:12px;font-family:'Space Grotesk',sans-serif;font-size:14px;letter-spacing:.24em;font-weight:500;color:#fff;text-decoration:none;min-height:44px}
+.back svg{transition:transform .4s}
+.back:hover{color:#2ef2c6}.back:hover svg{transform:translateX(-5px)}
+.prog{position:fixed;left:0;top:0;height:2px;width:100%;background:#2ef2c6;transform-origin:0 50%;transform:scaleX(0);z-index:80}
+@keyframes rise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-30px,24px) scale(1.08)}}
+.rise{opacity:0;animation:rise 1.1s cubic-bezier(.2,.8,.2,1) forwards}
+.d1{animation-delay:.1s}.d2{animation-delay:.22s}.d3{animation-delay:.34s}.d4{animation-delay:.46s}.d5{animation-delay:.6s}
+.blob{position:absolute;border-radius:50%;pointer-events:none;filter:blur(10px);animation:drift 14s ease-in-out infinite}
+[data-reveal]{opacity:0;transform:translateY(40px);transition:opacity 1s cubic-bezier(.2,.8,.2,1),transform 1s cubic-bezier(.2,.8,.2,1)}
+[data-reveal][data-in]{opacity:1;transform:none}
+.wrap{position:relative;max-width:1280px;margin:0 auto}
+.sec{position:relative;padding:96px 40px}
+.sec-k{font-family:'JetBrains Mono',monospace;font-size:12px;color:#2ef2c6;letter-spacing:.12em;margin-bottom:18px}
+.sec-h{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(34px,4vw,56px);letter-spacing:-.01em;margin:0;line-height:1.05}
+.sec-sub{font-size:18px;line-height:1.6;color:#a9a9a9;max-width:680px;margin:20px 0 0}
+.meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;border-top:1px solid #222;padding-top:32px}
+.meta-l{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#7a7a7a;font-family:'Space Grotesk',sans-serif}
+.meta-v{font-family:'Space Grotesk',sans-serif;font-size:20px;margin-top:10px;font-weight:500}
+.meta-v.acc{color:#2ef2c6}
+.shot{position:relative;border:1px solid #1f1f1f;background:#0d0d0d;overflow:hidden}
+.shot img{display:block;width:100%;height:auto;transition:transform 1.4s cubic-bezier(.2,.8,.2,1)}
+.shot:hover img{transform:scale(1.03)}
+.bar{display:flex;gap:7px;padding:12px 14px;border-bottom:1px solid #1f1f1f;background:#111}
+.bar i{width:9px;height:9px;border-radius:50%;background:#333}.bar i:last-child{background:#2ef2c6}
+.scr{max-height:min(680px,72vh);overflow-y:auto;overscroll-behavior:auto;scrollbar-width:thin;scrollbar-color:#2ef2c6 #111}
+.scr img{transform:none !important}
+.hint{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#2ef2c6;margin-left:auto;padding-right:6px}
+.gtabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.gtabs button{border:1px solid #2a2a2a;padding:0 16px;min-height:44px;font-family:'Space Grotesk',sans-serif;font-size:14px;color:#bdbdbd;transition:border-color .3s,color .3s,background .3s}
+.gtabs button:hover{border-color:#2ef2c6;color:#2ef2c6}
+.gtabs button.on{background:#2ef2c6;border-color:#2ef2c6;color:#002a20}
+@keyframes gin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.gpane{animation:gin .5s cubic-bezier(.2,.8,.2,1)}
+.vid{display:block;width:100%;height:auto;background:#000}
+.code{font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.75;color:#cfcfcf;background:#0b0b0b;border:1px solid #1f1f1f;padding:24px 26px;margin:0;overflow-x:auto;white-space:pre}
+.code .k{color:#8fb8ff}.code .s{color:#2ef2c6}.code .n{color:#ffb86b}.code .c{color:#6a6a6a}
+.lc{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.lc button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid #2a2a2a;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em;color:#cfcfcf;transition:border-color .3s,background .3s,transform .3s}
+.lc button:hover{transform:translateY(-2px)}
+.lc button i{width:8px;height:8px;border-radius:50%}
+.lc button.on{border-color:#2ef2c6;background:#0e1d19;color:#fff}
+.lc .arr{color:#444;font-size:14px}
+.sev{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;padding:3px 8px;border-radius:3px}
+.sev.b{background:#3a1414;color:#ff8a8a}.sev.c{background:#3a2a10;color:#ffc46b}.sev.m{background:#182436;color:#8fb8ff}.sev.i{background:#1c1c1c;color:#aaa}
+.sev.f{background:#3a1414;color:#ff8a8a}.sev.s{background:#262626;color:#c8c8c8}
+.sec-head{margin-bottom:40px}
+.scr-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 24px}
+.scr-lbl{display:flex;align-items:center;gap:12px;font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:500;margin-bottom:12px}
+.scr-lbl span{font-family:'JetBrains Mono',monospace;font-size:12px;color:#2ef2c6}
+.cap{font-size:13px;color:#7d7d7d;margin-top:14px;font-family:'JetBrains Mono',monospace}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.box{position:relative;background:#111;border:1px solid #1d1d1d;padding:28px;transition:border-color .4s,transform .5s cubic-bezier(.2,.8,.2,1),background .4s}
+.box:hover{border-color:#2a3d38;transform:translateY(-4px);background:#131514}
+.box-k{font-family:'JetBrains Mono',monospace;font-size:12px;color:#5f5f5f}
+.box-t{font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:20px;margin:14px 0 0;line-height:1.3}
+.box-p{font-size:15px;line-height:1.6;color:#a3a3a3;margin:12px 0 0}
+.box.hot{border-color:#1f4a40;background:linear-gradient(180deg,#0f1f1b,#111 70%)}
+.quote{font-family:'Space Grotesk',sans-serif;font-size:19px;line-height:1.45;color:#eaeaea;margin:14px 0 0}
+.big-n{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(44px,5vw,72px);line-height:1;letter-spacing:-.02em}
+.big-l{font-size:15px;color:#9a9a9a;margin-top:12px;line-height:1.5}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{border:1px solid #2a2a2a;padding:8px 12px;font-size:14px;color:#d8d8d8;transition:border-color .3s,color .3s,transform .3s}
+.chip:hover{border-color:#2ef2c6;color:#2ef2c6;transform:translateY(-2px)}
+.callout{border-left:2px solid #2ef2c6;padding:6px 0 6px 22px;font-family:'Space Grotesk',sans-serif;font-size:clamp(22px,2.4vw,30px);line-height:1.35;max-width:900px}
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tbl th{font-family:'Space Grotesk',sans-serif;font-weight:500;text-align:left;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#8a8a8a;padding:16px 18px;border-bottom:1px solid #262626}
+.tbl td{padding:18px;border-bottom:1px solid #1a1a1a;color:#b9b9b9;vertical-align:top;line-height:1.5}
+.tbl tr{transition:background .3s}
+.tbl tbody tr:hover{background:#0f1614}
+.tbl td:first-child{color:#f0f0f0;font-family:'Space Grotesk',sans-serif;font-weight:500}
+.yes{color:#2ef2c6}.no{color:#ff7a45}
+.seg{display:inline-flex;border:1px solid #2a2a2a;padding:4px;gap:4px}
+.seg button{padding:0 18px;min-height:44px;font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#9a9a9a;transition:background .3s,color .3s}
+.seg button.on{background:#2ef2c6;color:#002a20}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.steps li{display:flex;align-items:center;gap:18px;padding:14px 0;border-bottom:1px solid #1a1a1a;font-size:16px;color:#d6d6d6}
+.steps li span{font-family:'JetBrains Mono',monospace;font-size:12px;color:#2ef2c6;width:26px}
+.mcard{text-align:left;background:#111;border:1px solid #1d1d1d;padding:26px;min-height:150px;display:flex;flex-direction:column;justify-content:space-between;transition:border-color .3s,background .3s,transform .4s}
+.mcard:hover{transform:translateY(-3px);border-color:#2a3d38}
+.mcard.on{border-color:#2ef2c6;background:#0e1d19}
+.mcard .n{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:40px}
+.mcard .l{font-size:14px;color:#9a9a9a;margin-top:8px}
+.proc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid #1d1d1d;border-left:1px solid #1d1d1d}
+.proc>div{border-right:1px solid #1d1d1d;border-bottom:1px solid #1d1d1d;padding:26px;transition:background .3s}
+.proc>div:hover{background:#0f1614}
+.proc .k{font-family:'JetBrains Mono',monospace;font-size:12px;color:#2ef2c6}
+.proc .t{font-family:'Space Grotesk',sans-serif;font-size:18px;margin-top:12px;font-weight:500}
+.swatch{display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch;height:100%;text-align:left;background:#111;border:1px solid #1d1d1d;padding:16px;transition:transform .4s,border-color .3s}
+.swatch>div:last-child{margin-top:auto;padding-top:12px}
+.swatch:hover{transform:translateY(-4px);border-color:#333}
+.sw{height:120px;border:1px solid rgba(255,255,255,.08)}
+.next{display:block;text-decoration:none;color:#f4f4f4;border-top:1px solid #1d1d1d;padding:80px 40px 100px;position:relative;overflow:hidden}
+.next .nt{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(48px,9vw,140px);line-height:1;letter-spacing:-.02em;transition:transform .8s cubic-bezier(.2,.8,.2,1),color .4s;display:inline-block}
+.next:hover .nt{transform:translateX(24px);color:#2ef2c6}
+.next:hover{color:#f4f4f4}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:28px 40px;border-top:1px solid #161616;font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:.3em;color:#8a8a8a}
+.top-btn{font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:.3em;color:#8a8a8a;min-height:44px}
+.top-btn:hover{color:#2ef2c6}
+@media (max-width:860px){
+.hdr{top:10px;width:calc(100% - 24px);padding:6px 8px 6px 16px}.sec{padding:84px 20px}.next{padding:60px 20px 80px}.foot{padding:24px 20px}
+.meta,.g4{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g2,.g3,.proc,.scr-grid{grid-template-columns:minmax(0,1fr)}
+.cur-glow,.cur-tint{display:none}
+.tbl-box{overflow-x:auto}
+}
+@media (prefers-reduced-motion:reduce){.rise{animation:none;opacity:1}[data-reveal]{opacity:1;transform:none}.blob{animation:none}}
+</style>
+<style>.dc-if{display:contents}.dc-off{display:none !important}</style>
+</head>
+<body>
+<div class="pj" data-ref="setRoot">
+<div class="prog" data-ref="setProg" aria-hidden="true"></div>
+<div class="cur-glow" data-ref="setGlow" aria-hidden="true"></div>
+<div class="cur-tint" data-ref="setTint" aria-hidden="true"></div>
+<header class="hdr">
+<a class="logo" href="index.html">PJ<span>.</span></a>
+<a class="back" href="index.html"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M14 8H3M7.5 3.5 3 8l4.5 4.5"></path></svg>ALL WORK</a>
+</header>
+
+<section style="position: relative; padding: 170px 40px 80px; overflow: hidden">
+<div class="blob" style="width: 700px; height: 700px; right: -6%; top: 4%; background: radial-gradient(circle, rgba(18,120,98,.4) 0%, rgba(0,0,0,0) 68%)" aria-hidden="true"></div>
+<div class="wrap">
+<div class="eyebrow rise d1">Case Study 01 · Hexalog · Client-facing web app</div>
+<h1 class="disp rise d2" style="margin: 26px 0 0; font-weight: 600; font-size: clamp(48px, 7.4vw, 112px); line-height: 1; letter-spacing: -.025em; max-width: 1100px">Order Management System</h1>
+<p class="rise d3" style="margin: 34px 0 0; max-width: 760px; font-size: clamp(18px, 1.6vw, 22px); line-height: 1.6; color: #b4b4b4">A client-facing logistics platform that lets Hexalog’s enterprise clients manage orders, quotations, invoicing and partners, with real-time tracking and reporting.</p>
+<div class="meta rise d4" style="margin-top: 56px"><div><div class="meta-l">Role</div><div class="meta-v">Lead Designer</div></div><div><div class="meta-l">Duration</div><div class="meta-v">3 months</div></div><div><div class="meta-l">Outcome</div><div class="meta-v acc">25–30% completion</div></div><div><div class="meta-l">Impact</div><div class="meta-v acc">14 hrs/week saved</div></div></div>
+<div class="rise d5" style="margin-top: 64px">
+<div class="shot"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><span class="hint">scroll inside ↓</span></div><div class="scr" tabindex="0" aria-label="Hexalog OMS dashboard, scrollable"><img src="assets/img/oms-dash.png" alt="Hexalog OMS dashboard" loading="lazy"></div></div>
+<div class="cap">Dashboard: three onramps to a quote, not one · the KYC banner blocks nothing · a proportion bar before the table · calendar, separate from the table.</div>
+</div>
+</div>
+</section>
+
+<section class="sec">
+<div class="wrap">
+<div data-reveal="1" class="sec-head"><div class="sec-k">01 / Context &amp; problem</div><h2 class="sec-h">What is Hexalog?</h2><p class="sec-sub">A B2B logistics platform operating across the UAE, India and the Middle East, managing freight, customs clearance and last-mile delivery for enterprise clients.</p></div>
+<div class="callout" data-reveal="1" style="margin-bottom: 56px">Operations teams juggled <span style="color: #2ef2c6">4 separate tools</span> to manage a single shipment.</div><div class="g4"><div class="box hot" data-reveal="1"><div class="box-k">Pain 01</div><h3 class="box-t">Quotations managed manually</h3><p class="box-p">In Excel, with no structure or version control.</p></div><div class="box" data-reveal="1"><div class="box-k">Pain 02</div><h3 class="box-t">Shipment status invisible</h3><p class="box-p">Problems were discovered only when something went wrong.</p></div><div class="box" data-reveal="1"><div class="box-k">Pain 03</div><h3 class="box-t">Document uploads</h3><p class="box-p">Zero feedback. Rejections arrived via email.</p></div><div class="box hot" data-reveal="1"><div class="box-k">Pain 04</div><h3 class="box-t">Broken navigation</h3><p class="box-p">14 flat items, no grouping under product growth.</p></div></div>
+</div>
+</section>
+
+<section class="sec" style="background: #070707">
+<div class="wrap">
+<div data-reveal="1" class="sec-head"><div class="sec-k">02 / Process</div><h2 class="sec-h">How I worked</h2><p class="sec-sub">I worked from PRDs and live business workflows in a cross-functional team, owning every step from research to QA.</p></div>
+<div class="proc" data-reveal="1"><div><div class="k">01</div><div class="t">User Research</div></div><div><div class="k">02</div><div class="t">PRD Review &amp; Requirement Analysis</div></div><div><div class="k">03</div><div class="t">Information Architecture &amp; User Flow Mapping</div></div><div><div class="k">04</div><div class="t">Low-Fidelity Wireframing</div></div><div><div class="k">05</div><div class="t">High-Fidelity UI Design</div></div><div><div class="k">06</div><div class="t">Interactive Prototyping</div></div><div><div class="k">07</div><div class="t">Design System &amp; Component Creation</div></div><div><div class="k">08</div><div class="t">Usability Validation, Stakeholder Feedback &amp; Iteration</div></div><div><div class="k">09</div><div class="t">Developer Handoff, Cross-functional Collaboration &amp; Design QA</div></div></div><div class="chips" data-reveal="1" style="margin-top: 32px"><span class="chip">25+ reusable components</span><span class="chip">8+ modules designed</span><span class="chip">Design System &amp; UI Library</span><span class="chip">Worked from PRDs &amp; live workflows</span></div>
+</div>
+</section>
+
+<section class="sec">
+<div class="wrap">
+<div data-reveal="1" class="sec-head"><div class="sec-k">03 / Research</div><h2 class="sec-h">What I found</h2></div>
+<div class="chips" data-reveal="1" style="margin: -24px 0 40px"><span class="chip">Stakeholder interviews</span><span class="chip">PRD review</span><span class="chip">System audit</span><span class="chip">Competitive analysis</span></div><div class="g2"><div class="box" data-reveal="1" style="border-left: 2px solid #2ef2c6"><div class="box-k">Insight 01</div><p class="quote">“Ops teams toggled between 4 tools to track one shipment.”</p><p class="box-p">→ Fragmented workflow across tracking platforms.</p></div><div class="box" data-reveal="1" style="border-left: 2px solid #2ef2c6"><div class="box-k">Insight 02</div><p class="quote">“Quotation was done in Excel with no pricing guardrails.”</p><p class="box-p">→ Manual pricing errors and compliance risks.</p></div><div class="box" data-reveal="1" style="border-left: 2px solid #2ef2c6"><div class="box-k">Insight 03</div><p class="quote">“Document rejections came via email with no in-app feedback.”</p><p class="box-p">→ Delayed document processing and resubmission cycles.</p></div><div class="box" data-reveal="1" style="border-left: 2px solid #2ef2c6"><div class="box-k">Insight 04</div><p class="quote">“Navigation had 14 flat items, so discoverability broke.”</p><p class="box-p">→ Users lost in the information architecture.</p></div></div>
+</div>
+</section>
+
+<section class="sec">
+<div class="wrap">
+<div data-reveal="1" class="sec-head"><div class="sec-k">04 / Competitive analysis</div><h2 class="sec-h">Where Hexalog had to win</h2><p class="sec-sub">Benchmarked against Flexport, ShipBob and Freightos on the capabilities operations teams rely on.</p></div>
+<div class="tbl-box" data-reveal="1"><table class="tbl"><thead><tr><th>Capability</th><th style="color: #2ef2c6">Hexalog</th><th>Flexport</th><th>ShipBob</th><th>Freightos</th></tr></thead><tbody><tr><td>Real-time Tracking</td><td><span class="yes" aria-label="Yes">●  Yes</span></td><td><span class="yes" aria-label="Yes">●  Yes</span></td><td><span class="yes" aria-label="Yes">●  Yes</span></td><td><span class="yes" aria-label="Yes">●  Yes</span></td></tr><tr><td>Automated Pricing</td><td><span class="yes" aria-label="Yes">●  Yes</span></td><td><span class="yes" aria-label="Yes">●  Yes</span></td><td><span class="no" aria-label="No">✕  No</span></td><td><span class="no" aria-label="No">✕  No</span></td></tr><tr><td>Navigation UX</td><td><span class="yes" aria-label="Yes">●  Yes</span></td><td><span class="no" aria-label="No">✕  No</span></td><td><span class="yes" aria-label="Yes">●  Yes</span></td><td><span class="no" aria-label="No">✕  No</span></td></tr><tr><td>Document Management</td><td><span class="yes" aria-label="Yes">●  Yes</span></td><td><span class="yes" aria-label="Yes">●  Yes</span></td><td><span class="no" aria-label="No">✕  No</span></td><td><span class="no" aria-label="No">✕  No</span></td></tr><tr><td>API Integration</td><td><span class="yes" aria-label="Yes">●  Yes</span></td><td><span class="yes" aria-label="Yes">●  Yes</span></td><td><span class="yes" aria-label="Yes">●  Yes</span></td><td><span class="yes" aria-label="Yes">●  Yes</span></td></tr></tbody></table></div>
+</div>
+</section>
+
+<section class="sec">
+<div class="wrap">
+<div data-reveal="1" class="sec-head"><div class="sec-k">05 / Feature 01 · Dashboard intelligence</div><h2 class="sec-h">Navigation, grouped by task</h2></div>
+<div data-reveal="1"><div class="seg" role="group" aria-label="Navigation version" style="margin-bottom: 32px"><button data-b-class="{{bBefore}}" data-on="click:setBefore" data-bound>Before · 14 flat items</button><button data-b-class="{{bAfter}}" data-on="click:setAfter" data-bound>After · grouped</button></div><div class="dc-if" data-if="navBefore"><div class="g4" style="gap: 8px 20px"><div class="mono" style="font-size: 14px; color: #b0b0b0; padding: 10px 0; border-bottom: 1px solid #1a1a1a">Dashboard</div><div class="mono" style="font-size: 14px; color: #b0b0b0; padding: 10px 0; border-bottom: 1px solid #1a1a1a">Orders</div><div class="mono" style="font-size: 14px; color: #b0b0b0; padding: 10px 0; border-bottom: 1px solid #1a1a1a">Shipments</div><div class="mono" style="font-size: 14px; color: #b0b0b0; padding: 10px 0; border-bottom: 1px solid #1a1a1a">Warehouse</div><div class="mono" style="font-size: 14px; color: #b0b0b0; padding: 10px 0; border-bottom: 1px solid #1a1a1a">Invoices</div><div class="mono" style="font-size: 14px; color: #b0b0b0; padding: 10px 0; border-bottom: 1px solid #1a1a1a">Reports</div><div class="mono" style="font-size: 14px; color: #b0b0b0; padding: 10px 0; border-bottom: 1px solid #1a1a1a">Partner Directory</div><div class="mono" style="font-size: 14px; color: #b0b0b0; padding: 10px 0; border-bottom: 1px solid #1a1a1a">Settings</div><div class="mono" style="font-size: 14px; color: #b0b0b0; padding: 10px 0; border-bottom: 1px solid #1a1a1a">Analytics</div><div class="mono" style="font-size: 14px; color: #b0b0b0; padding: 10px 0; border-bottom: 1px solid #1a1a1a">API Keys</div><div class="mono" style="font-size: 14px; color: #b0b0b0; padding: 10px 0; border-bottom: 1px solid #1a1a1a">Notifications</div><div class="mono" style="font-size: 14px; color: #b0b0b0; padding: 10px 0; border-bottom: 1px solid #1a1a1a">Help</div><div class="mono" style="font-size: 14px; color: #b0b0b0; padding: 10px 0; border-bottom: 1px solid #1a1a1a">Documentation</div><div class="mono" style="font-size: 14px; color: #b0b0b0; padding: 10px 0; border-bottom: 1px solid #1a1a1a">Integrations</div></div><p class="box-p" style="margin-top: 24px; color: #ff9a6e">Users took 2+ weeks to learn navigation. No grouping. No hierarchy.</p></div><div class="dc-if" data-if="navAfter"><div class="g4"><div class="box"><div class="eyebrow" style="font-size: 11px">Orders</div><div style="font-size: 16px; padding: 10px 0 0; color: #e6e6e6">Quotations</div><div style="font-size: 16px; padding: 10px 0 0; color: #e6e6e6">Shipments</div></div><div class="box"><div class="eyebrow" style="font-size: 11px">Insights</div><div style="font-size: 16px; padding: 10px 0 0; color: #e6e6e6">Dashboard</div><div style="font-size: 16px; padding: 10px 0 0; color: #e6e6e6">Warehouse</div><div style="font-size: 16px; padding: 10px 0 0; color: #e6e6e6">Last Mile</div><div style="font-size: 16px; padding: 10px 0 0; color: #e6e6e6">Reports</div></div><div class="box"><div class="eyebrow" style="font-size: 11px">Relationships</div><div style="font-size: 16px; padding: 10px 0 0; color: #e6e6e6">Partner Directory</div></div><div class="box"><div class="eyebrow" style="font-size: 11px">Account</div><div style="font-size: 16px; padding: 10px 0 0; color: #e6e6e6">Invoices</div><div style="font-size: 16px; padding: 10px 0 0; color: #e6e6e6">Settings</div></div></div><p class="box-p" style="margin-top: 24px; color: #2ef2c6">Grouped by user workflows: “What am I trying to do?”, not “Which module owns this?”</p></div></div>
+</div>
+</section>
+
+<section class="sec">
+<div class="wrap">
+<div data-reveal="1" class="sec-head"><div class="sec-k">06 / Order metrics</div><h2 class="sec-h">One click from number to work</h2><p class="sec-sub">Last 60 days, real-time data. Try it: click a metric to see where it lands.</p></div>
+<div class="g4" data-reveal="1"><button data-b-class="mcard {{m0}}" class="mcard" data-on="click:pick0" data-bound><span class="n">1,847</span><span class="l">Total quotations</span></button><button data-b-class="mcard {{m1}}" class="mcard" data-on="click:pick1" data-bound><span class="n">248</span><span class="l">Active shipments</span></button><button data-b-class="mcard {{m2}}" class="mcard" data-on="click:pick2" data-bound><span class="n">156</span><span class="l">On track</span></button><button data-b-class="mcard {{m3}}" class="mcard" data-on="click:pick3" data-bound><span class="n">67</span><span class="l">Pending confirmation</span></button></div><div class="mono" data-reveal="1" style="margin-top: 18px; font-size: 14px; color: #2ef2c6">&gt; <span data-t="metricNote"></span></div><div class="g2" style="margin-top: 56px"><div class="box" data-reveal="1"><div class="box-k">Q</div><h3 class="box-t">Why make metric cards clickable?</h3><p class="box-p">Collapsed three manual steps into one click. You land pre-filtered, with the filter visibly applied.</p></div><div class="box" data-reveal="1"><div class="box-k">Q</div><h3 class="box-t">Why swap the metric when it’s zero?</h3><p class="box-p">Zero in a time-boxed metric reads as inactivity, so it auto-swaps to the all-time total with an adjusted label.</p></div><div class="box" data-reveal="1"><div class="box-k">Q</div><h3 class="box-t">Why keep the card visually identical?</h3><p class="box-p">Only label and value change, so the swap never feels bolted on. It feels native and seamless.</p></div><div class="box" data-reveal="1"><div class="box-k">Q</div><h3 class="box-t">Why URL/state-driven filters?</h3><p class="box-p">Bookmarkable, shareable filtered views. The applied filter survives browser back/forward, preserving context.</p></div></div><div class="chips" data-reveal="1" style="margin-top: 28px"><span class="chip">Single-click filtering eliminates manual navigation</span><span class="chip">Smart fallbacks prevent false negatives</span><span class="chip">Consistent UI with no context switching</span></div>
+</div>
+</section>
+
+<section class="sec">
+<div class="wrap">
+<div data-reveal="1" class="sec-head"><div class="sec-k">07 / Quotation intake</div><h2 class="sec-h">Upload a quotation in seconds</h2><p class="sec-sub">Bulk-load shipment data instead of manual row-by-row entry.</p></div>
+<div class="g2" data-reveal="1"><div style="border-top: 1px solid #262626; padding-top: 24px"><div class="big-n">24×</div><div class="big-l">faster intake</div></div><div style="border-top: 1px solid #262626; padding-top: 24px"><div class="big-n">100%</div><div class="big-l">validated rows</div></div></div><div style="height: 48px"></div><div data-reveal="1"><div class="shot"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><span class="hint">scroll inside ↓</span></div><div class="scr" tabindex="0" aria-label="Request a quote with bulk upload, full page, scrollable"><img src="assets/img/oms-quote-full.png" alt="Request a quote with bulk upload, full page" loading="lazy"></div></div><div class="cap">Request a quote: shipment details, bulk upload with row validation, cargo, locations and additional info.</div></div><div class="g2" style="margin-top: 20px; align-items: center"><div data-reveal="1"><div class="shot"><div class="bar" aria-hidden="true"><i></i><i></i><i></i></div><img src="assets/img/oms-quote-resp.png" alt="Quote responses: pending and expired states" loading="lazy"></div></div><div class="box hot" data-reveal="1"><div class="box-k">States</div><h3 class="box-t">Quote responses that explain themselves</h3><p class="box-p">Pending responses carry the price, expiry and a single Accept action. Expired ones keep the price visible but lock the action, so nothing is lost.</p></div></div>
+</div>
+</section>
+
+<section class="sec">
+<div class="wrap">
+<div data-reveal="1" class="sec-head"><div class="sec-k">08 / Live tracking</div><h2 class="sec-h">Know exactly where everything is</h2><p class="sec-sub">Real-time shipment status with timeline milestones, replacing four separate tools.</p></div>
+<div class="g2" data-reveal="1"><div style="border-top: 1px solid #262626; padding-top: 24px"><div class="big-n">Real-time</div><div class="big-l">status updates</div></div><div style="border-top: 1px solid #262626; padding-top: 24px"><div class="big-n">4 stages</div><div class="big-l">always visible</div></div></div><div style="height: 48px"></div><div data-reveal="1"><div class="shot"><div class="bar" aria-hidden="true"><i></i><i></i><i></i></div><img src="assets/img/oms-tracking.jpg" alt="Shipment tracking timeline" loading="lazy"></div></div><div class="g3" style="margin-top: 20px"><div class="box hot" data-reveal="1"><div class="box-k">01</div><h3 class="box-t">Live updates</h3><p class="box-p">Every milestone, as it happens.</p></div><div class="box" data-reveal="1"><div class="box-k">02</div><h3 class="box-t">Geo-location mapping</h3><p class="box-p">Visual tracking across all shipping modes.</p></div><div class="box" data-reveal="1"><div class="box-k">03</div><h3 class="box-t">Predictive ETAs</h3><p class="box-p">AI-powered delivery forecasting with confidence scores.</p></div></div><div style="height: 20px"></div><div data-reveal="1"><div class="shot"><div class="bar" aria-hidden="true"><i></i><i></i><i></i></div><img src="assets/img/oms-shipment.jpg" alt="Shipment detail with full history" loading="lazy"></div></div>
+</div>
+</section>
+
+<section class="sec" style="background: #070707">
+<div class="wrap">
+<div data-reveal="1" class="sec-head"><div class="sec-k">09 / Status migration</div><h2 class="sec-h">When the source of truth changes underneath you</h2><p class="sec-sub">The ERP rebuilt its status model: 11 new states, gated by service type, from 4 to 10 steps.</p></div>
+<div class="g2" style="align-items: start"><div data-reveal="1"><div class="seg" role="group" aria-label="Service type" style="margin-bottom: 24px"><button data-b-class="{{b4}}" data-on="click:set4" data-bound>04 steps</button><button data-b-class="{{b10}}" data-on="click:set10" data-bound>10 steps</button></div><div class="dc-if" data-if="s4"><ol class="steps"><li><span>01</span>Order Received</li><li><span>02</span>In Transit</li><li><span>03</span>Out for Delivery</li><li><span>04</span>Delivered</li></ol></div><div class="dc-if" data-if="s10"><ol class="steps"><li><span>01</span>Drafted</li><li><span>02</span>Shipment Booked</li><li><span>03</span>Cargo Pick Up</li><li><span>04</span>Cargo Received at Origin Hub</li><li><span>05</span>Origin Customs Cleared</li><li><span>06</span>Flight Departed</li><li><span>07</span>Flight Arrived</li><li><span>08</span>Destination Customs Cleared</li><li><span>09</span>Cargo Received at Destination Hub</li><li><span>10</span>Completed</li></ol></div></div><div style="display: flex; flex-direction: column; gap: 20px"><div class="box" data-reveal="1"><div class="box-k">Constraint</div><h3 class="box-t">Zero visual regressions</h3><p class="box-p">Old and new shipments must coexist with zero visual regressions.</p></div><div class="box hot" data-reveal="1"><div class="box-k">Solution</div><h3 class="box-t">An assumption-free timeline</h3><p class="box-p">The timeline component makes no assumptions about step count or labels.</p></div></div></div>
+</div>
+</section>
+
+<section class="sec">
+<div class="wrap">
+<div data-reveal="1" class="sec-head"><div class="sec-k">10 / Design system</div><h2 class="sec-h">Component showcase</h2><p class="sec-sub">25+ reusable components in a system that scaled across 8 modules, so every new feature stays consistent.</p></div>
+<div data-reveal="1"><div class="shot"><div class="bar" aria-hidden="true"><i></i><i></i><i></i></div><img src="assets/img/oms-components-hq.jpg" alt="OMS component showcase" loading="lazy"></div></div>
+</div>
+</section>
+
+<section class="sec" style="background: #070707">
+<div class="wrap">
+<div data-reveal="1" class="sec-head"><div class="sec-k">10b / More screens</div><h2 class="sec-h">Across the platform</h2><p class="sec-sub">Onboarding, KYC, warehouse, quote plans and login. Pick a screen; long pages scroll inside the frame.</p></div>
+<div data-reveal="1"><div class="gtabs" role="group" aria-label="Screens"><button data-b-class="{{t0}}" data-on="click:setG0" data-bound>Onboarding</button><button data-b-class="{{t1}}" data-on="click:setG1" data-bound>GST error state</button><button data-b-class="{{t2}}" data-on="click:setG2" data-bound>KYC documents</button><button data-b-class="{{t3}}" data-on="click:setG3" data-bound>Warehouse</button><button data-b-class="{{t4}}" data-on="click:setG4" data-bound>Quote plan</button><button data-b-class="{{t5}}" data-on="click:setG5" data-bound>Login</button><button data-b-class="{{t6}}" data-on="click:setG6" data-bound>Dashboard v1</button></div><div class="dc-if" data-if="g0"><div class="gpane"><div class="shot"><div class="bar" aria-hidden="true"><i></i><i></i><i></i></div><img src="assets/img/oms-onboard.png" alt="Onboarding: select company type" loading="lazy"></div><div class="cap">Let’s set up your business: company type chips auto-fill the details.</div></div></div><div class="dc-if" data-if="g1"><div class="gpane"><div class="shot"><div class="bar" aria-hidden="true"><i></i><i></i><i></i></div><img src="assets/img/oms-onboard-err.png" alt="Onboarding: GST validation error" loading="lazy"></div><div class="cap">One number to pull company details, with a clear error and a skip path.</div></div></div><div class="dc-if" data-if="g2"><div class="gpane"><div class="shot"><div class="bar" aria-hidden="true"><i></i><i></i><i></i></div><img src="assets/img/oms-kyc.png" alt="KYC company documents" loading="lazy"></div><div class="cap">Required documents with status, counts and one-tap upload.</div></div></div><div class="dc-if" data-if="g3"><div class="gpane"><div class="shot"><div class="bar" aria-hidden="true"><i></i><i></i><i></i></div><img src="assets/img/oms-warehouse.png" alt="Warehouse returns DTO vs RTO" loading="lazy"></div><div class="cap">Warehouse: KPI strip, module tabs and the DTO vs RTO comparison.</div></div></div><div class="dc-if" data-if="g4"><div class="gpane"><div class="shot"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><span class="hint">scroll inside ↓</span></div><div class="scr" tabindex="0" aria-label="Plan and group quote responses, scrollable"><img src="assets/img/oms-plan.png" alt="Plan and group quote responses" loading="lazy"></div></div><div class="cap">Group-level quote responses covering multiple shipment requests.</div></div></div><div class="dc-if" data-if="g5"><div class="gpane"><div class="shot"><div class="bar" aria-hidden="true"><i></i><i></i><i></i></div><img src="assets/img/oms-login.jpg" alt="Login and sign-up" loading="lazy"></div><div class="cap">Login / sign-up with business SSO.</div></div></div><div class="dc-if" data-if="g6"><div class="gpane"><div class="shot"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><span class="hint">scroll inside ↓</span></div><div class="scr" tabindex="0" aria-label="Earlier dashboard iteration, scrollable"><img src="assets/img/oms-dash-v1.png" alt="Earlier dashboard iteration" loading="lazy"></div></div><div class="cap">An earlier dashboard iteration, before the KYC banner and quick actions.</div></div></div></div>
+</div>
+</section>
+
+<section class="sec">
+<div class="wrap">
+<div data-reveal="1" class="sec-head"><div class="sec-k">11 / Decisions</div><h2 class="sec-h">Reasoning over pixels: every decision had a reason</h2></div>
+<div class="tbl-box" data-reveal="1"><table class="tbl"><thead><tr><th>Decision</th><th>Pain</th><th>Choice</th><th>Outcome</th></tr></thead><tbody><tr><td>Global Navigation</td><td>High cognitive load due to nested menus.</td><td>A flat, persistent sidebar architecture.</td><td style="color: #2ef2c6">40% reduction in time-to-task completion.</td></tr><tr><td>Color System</td><td>Low-contrast interaction states in accessibility audits.</td><td>Electric Indigo with a systematic 4.5:1 ratio.</td><td style="color: #2ef2c6">WCAG 2.1 AA compliance across all platforms.</td></tr><tr><td>Data Grid Density</td><td>Excessive whitespace made vertical scanning difficult.</td><td>Tightened row height and added subtle zebra striping.</td><td style="color: #2ef2c6">25% more data visible per viewport.</td></tr><tr><td>Typography Scale</td><td>Inconsistent header sizes weakened hierarchy.</td><td>A strict Major Third (1.250) scale.</td><td style="color: #2ef2c6">Clear, consistent visual hierarchy.</td></tr><tr><td>Empty States</td><td>Dead-ends caused drop-off after onboarding.</td><td>Blank screens replaced with actionable starter templates.</td><td style="color: #2ef2c6">15% lift in Day-7 retention.</td></tr></tbody></table></div>
+</div>
+</section>
+
+<section class="sec" style="background: #070707">
+<div class="wrap">
+<div data-reveal="1" class="sec-head"><div class="sec-k">12 / Access design</div><h2 class="sec-h">Who sees what, and who never knows</h2></div>
+<div class="g3"><div class="box hot" data-reveal="1"><div class="box-k">Role 01</div><h3 class="box-t">Internal Super User</h3><p class="box-p">Steps into any account, exactly as the customer sees it. Every action logged with identity, org and timestamp. Zero customer footprint.</p></div><div class="box" data-reveal="1"><div class="box-k">Role 02</div><h3 class="box-t">Support Viewer</h3><p class="box-p">A read-only mirror. Controls disabled, tooltips only. Invisible to the customer.</p></div><div class="box" data-reveal="1"><div class="box-k">Role 03</div><h3 class="box-t">Customer</h3><p class="box-p">The reference state: the standard view everything else mirrors. No trace, no banner, no log: that’s what makes invisibility meaningful.</p></div></div>
+</div>
+</section>
+
+<section class="sec">
+<div class="wrap">
+<div data-reveal="1" class="sec-head"><div class="sec-k">13 / Impact &amp; reflection</div><h2 class="sec-h">End-to-end ownership</h2><p class="sec-sub">13 PRDs owned end-to-end, across 9 modules. Contributed to a successful seed-stage funding round.</p></div>
+<div class="g4" data-reveal="1"><div style="border-top: 1px solid #262626; padding-top: 24px"><div class="big-n">40%</div><div class="big-l">reduction in manual effort</div></div><div style="border-top: 1px solid #262626; padding-top: 24px"><div class="big-n">2×</div><div class="big-l">task efficiency improvement</div></div><div style="border-top: 1px solid #262626; padding-top: 24px"><div class="big-n">60%</div><div class="big-l">client operational efficiency gain</div></div><div style="border-top: 1px solid #262626; padding-top: 24px"><div class="big-n">25+</div><div class="big-l">reusable components built</div></div></div><div class="callout" data-reveal="1" style="margin: 72px 0 48px">Designing Hexalog OMS taught me to think in workflows and system dependencies first. The screens follow from that clarity.</div><div class="g2"><div class="box" data-reveal="1"><div class="box-k">01</div><h3 class="box-t">Systems outlast screens</h3><p class="box-p">The shipment-status migration.</p></div><div class="box" data-reveal="1"><div class="box-k">02</div><h3 class="box-t">Enterprise UX means reducing complexity, not adding polish</h3><p class="box-p">Bulk upload + zero-state fallback.</p></div><div class="box" data-reveal="1"><div class="box-k">03</div><h3 class="box-t">Access design is a UX problem before it’s a security problem</h3><p class="box-p">Super User + Support Viewer.</p></div><div class="box" data-reveal="1"><div class="box-k">04</div><h3 class="box-t">A design system is only proven once it survives a migration</h3><p class="box-p">Design system → live migration.</p></div></div>
+</div>
+</section>
+
+<section class="sec">
+<div class="wrap">
+<div data-reveal="1" class="sec-head"><div class="sec-k">14 / AI product vision</div><h2 class="sec-h">If I were extending this OMS with AI</h2><p class="sec-sub">Here’s what I’d design next, starting with what’s already on the roadmap.</p></div>
+<div class="g3"><div class="box hot" data-reveal="1"><div class="box-k">AI 01</div><h3 class="box-t">AI-assisted document ingestion</h3><p class="box-p">Parsing customer shipping documents directly (Phase 3 of the Bulk Load Upload PRD). Side-by-side extracted vs original data, with field-level confidence and human override.</p></div><div class="box" data-reveal="1"><div class="box-k">AI 02</div><h3 class="box-t">Predictive exception detection</h3><p class="box-p">Flagging delay risk on the tracking timeline before a customs hold or missed connection happens, gated by a confidence threshold to avoid alert fatigue.</p></div><div class="box" data-reveal="1"><div class="box-k">AI 03</div><h3 class="box-t">Natural-language queries</h3><p class="box-p">A query like “Show me all DXB–BOM customs holds this week” against the warehouse and last-mile dashboards. The interpreted query is shown above results, with an edit option.</p></div></div>
+</div>
+</section>
+
+<section class="sec" style="background: #070707">
+<div class="wrap">
+<div data-reveal="1" class="sec-head"><div class="sec-k">15 / Mobile version</div><h2 class="sec-h">Hexalog, rebuilt for the phone</h2><p class="sec-sub">Opening Hexalog on a phone used to hit a “Desktop access required” wall. Now 24 screens are rebuilt for mobile, with tables that swipe while the job number stays put.</p></div>
+<div class="g2" data-reveal="1"><div style="border-top: 1px solid #262626; padding-top: 24px"><div class="big-n">24</div><div class="big-l">screens rebuilt for mobile</div></div><div style="border-top: 1px solid #262626; padding-top: 24px"><div class="big-n">Sticky</div><div class="big-l">job number while tables swipe</div></div></div><div style="height: 40px"></div><div data-reveal="1"><div class="shot"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><span class="hint">mobile version · 20 s</span></div><video class="vid" data-ref="setVid" src="assets/video/brag-1-1.mp4" poster="assets/img/mobile-poster.jpg" preload="metadata" aria-label="Hexalog OMS mobile version: from desktop-only to 24 mobile screens"></video></div></div>
+</div>
+</section>
+
+<section class="sec">
+<div class="wrap">
+<div data-reveal="1" class="sec-head"><div class="sec-k">16 / Walkthrough</div><h2 class="sec-h">See it in motion</h2><p class="sec-sub">Live product flow: account verification, setting a password, and onboarding the business.</p></div>
+<div data-reveal="1"><div class="shot"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><span class="hint">live product · 3 min</span></div><video class="vid" data-ref="setVid" src="assets/video/oms-onboarding.mp4" poster="assets/img/poster.jpg" preload="metadata" aria-label="Walkthrough of Hexalog OMS sign-up and onboarding"></video></div></div>
+</div>
+</section>
+
+<a class="next" href="website.html">
+<div class="wrap">
+<div class="eyebrow" style="margin-bottom: 22px">Next project →</div>
+<div class="nt">Hexalog Website</div>
+</div>
+</a>
+<footer class="foot">
+<span>© 2026 PRATISHTHA JOSHI</span>
+<button class="top-btn" data-on="click:goTop">BACK TO TOP ↑</button>
+</footer>
+</div>
+<script src="assets/dc-lite.js"></script>
+<script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { nav: 'after', metric: 0, steps: 10, copied: -1, g: 0, lc: 3 };
+    this.mx = 0; this.my = 0; this.gx = 0; this.gy = 0; this.tx = 0; this.ty = 0;
+  }
+  componentDidMount() {
+    var self = this;
+    var win = (this.root && this.root.ownerDocument && this.root.ownerDocument.defaultView) || window;
+    this.win = win;
+    this.mx = win.innerWidth * 0.6; this.my = win.innerHeight * 0.4;
+    this.gx = this.mx; this.gy = this.my; this.tx = this.mx; this.ty = this.my;
+    this.onMove = function (e) { self.mx = e.clientX; self.my = e.clientY; };
+    win.addEventListener('pointermove', this.onMove, { passive: true });
+    var loop = function () {
+      self.gx += (self.mx - self.gx) * 0.07; self.gy += (self.my - self.gy) * 0.07;
+      self.tx += (self.mx - self.tx) * 0.16; self.ty += (self.my - self.ty) * 0.16;
+      if (self.glow) self.glow.style.transform = 'translate3d(' + self.gx + 'px,' + self.gy + 'px,0)';
+      if (self.tint) self.tint.style.transform = 'translate3d(' + self.tx + 'px,' + self.ty + 'px,0)';
+      if (self.prog && self.root) {
+        var r = self.root.getBoundingClientRect();
+        var span = Math.max(1, r.height - win.innerHeight);
+        var p = Math.min(1, Math.max(0, -r.top / span));
+        self.prog.style.transform = 'scaleX(' + p + ')';
+      }
+      self.raf = win.requestAnimationFrame(loop);
+    };
+    this.raf = win.requestAnimationFrame(loop);
+    this.onWheel = function (e) {
+      var box = e.target && e.target.closest ? e.target.closest('.scr') : null;
+      if (!box || Math.abs(e.deltaY) < Math.abs(e.deltaX)) return;
+      var atEnd = box.scrollTop + box.clientHeight >= box.scrollHeight - 2;
+      var atTop = box.scrollTop <= 1;
+      if ((e.deltaY > 0 && atEnd) || (e.deltaY < 0 && atTop)) {
+        e.preventDefault();
+        var pg = self.pageScroller(box);
+        var dy = e.deltaMode === 1 ? e.deltaY * 32 : e.deltaY;
+        if (pg) pg.scrollTop += dy;
+      }
+    };
+    if (this.root) this.root.addEventListener('wheel', this.onWheel, { passive: false });
+    if (win.IntersectionObserver && this.root) {
+      this.io = new win.IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { if (en.isIntersecting) { en.target.setAttribute('data-in', '1'); self.io.unobserve(en.target); } });
+      }, { threshold: 0.12 });
+      this.root.querySelectorAll('[data-reveal]').forEach(function (el) { self.io.observe(el); });
+    } else if (this.root) {
+      this.root.querySelectorAll('[data-reveal]').forEach(function (el) { el.setAttribute('data-in', '1'); });
+    }
+  }
+  pageScroller(el) {
+    var win = this.win || window;
+    var n = el && el.parentElement;
+    while (n && n !== win.document.body) {
+      var cs = win.getComputedStyle(n);
+      if (/(auto|scroll)/.test(cs.overflowY) && n.scrollHeight > n.clientHeight + 1) return n;
+      n = n.parentElement;
+    }
+    return win.document.scrollingElement || win.document.documentElement;
+  }
+  componentWillUnmount() {
+    var win = this.win || window;
+    if (this.root && this.onWheel) this.root.removeEventListener('wheel', this.onWheel);
+    win.cancelAnimationFrame(this.raf);
+    win.removeEventListener('pointermove', this.onMove);
+    if (this.io) this.io.disconnect();
+  }
+  copy(i, hex) {
+    var self = this;
+    try { if (navigator.clipboard) navigator.clipboard.writeText(hex); } catch (e) {}
+    this.setState({ copied: i });
+    clearTimeout(this.ct);
+    this.ct = setTimeout(function () { self.setState({ copied: -1 }); }, 1400);
+  }
+  renderVals() {
+    var self = this;
+    var s = this.state;
+    var hexes = ['#0E0023', '#8F62DF', '#4D4D4D', '#FFFEF6'];
+    var metrics = [
+      'Opens Quotations filtered to all quotes from the last 60 days.',
+      'Opens Shipments filtered to active shipments, filter chip visible.',
+      'Opens Shipments filtered to on-track shipments only.',
+      'Opens Shipments filtered to those waiting for confirmation.'
+    ];
+    return {
+      setRoot: function (el) { self.root = el; },
+      setGlow: function (el) { self.glow = el; },
+      setTint: function (el) { self.tint = el; },
+      setProg: function (el) { self.prog = el; },
+      goTop: function () { if (self.root) self.root.scrollIntoView({ behavior: 'smooth', block: 'start' }); },
+      navBefore: s.nav === 'before',
+      navAfter: s.nav === 'after',
+      bBefore: s.nav === 'before' ? 'on' : '',
+      bAfter: s.nav === 'after' ? 'on' : '',
+      setBefore: function () { self.setState({ nav: 'before' }); },
+      setAfter: function () { self.setState({ nav: 'after' }); },
+      m0: s.metric === 0 ? 'on' : '', m1: s.metric === 1 ? 'on' : '', m2: s.metric === 2 ? 'on' : '', m3: s.metric === 3 ? 'on' : '',
+      pick0: function () { self.setState({ metric: 0 }); },
+      pick1: function () { self.setState({ metric: 1 }); },
+      pick2: function () { self.setState({ metric: 2 }); },
+      pick3: function () { self.setState({ metric: 3 }); },
+      metricNote: metrics[s.metric],
+      s4: s.steps === 4, s10: s.steps === 10,
+      b4: s.steps === 4 ? 'on' : '', b10: s.steps === 10 ? 'on' : '',
+      set4: function () { self.setState({ steps: 4 }); },
+      set10: function () { self.setState({ steps: 10 }); },
+      c0: s.copied === 0 ? 'Copied ✓' : 'Click to copy', c1: s.copied === 1 ? 'Copied ✓' : 'Click to copy',
+      c2: s.copied === 2 ? 'Copied ✓' : 'Click to copy', c3: s.copied === 3 ? 'Copied ✓' : 'Click to copy',
+      g0: s.g === 0, g1: s.g === 1, g2: s.g === 2, g3: s.g === 3, g4: s.g === 4, g5: s.g === 5, g6: s.g === 6, g7: s.g === 7, g8: s.g === 8, g9: s.g === 9, g10: s.g === 10, g11: s.g === 11,
+      t0: s.g === 0 ? 'on' : '', t1: s.g === 1 ? 'on' : '', t2: s.g === 2 ? 'on' : '', t3: s.g === 3 ? 'on' : '', t4: s.g === 4 ? 'on' : '', t5: s.g === 5 ? 'on' : '', t6: s.g === 6 ? 'on' : '', t7: s.g === 7 ? 'on' : '', t8: s.g === 8 ? 'on' : '', t9: s.g === 9 ? 'on' : '', t10: s.g === 10 ? 'on' : '', t11: s.g === 11 ? 'on' : '',
+      setG0: function () { self.setState({ g: 0 }); }, setG1: function () { self.setState({ g: 1 }); }, setG2: function () { self.setState({ g: 2 }); }, setG3: function () { self.setState({ g: 3 }); },
+      setG4: function () { self.setState({ g: 4 }); }, setG5: function () { self.setState({ g: 5 }); }, setG6: function () { self.setState({ g: 6 }); }, setG7: function () { self.setState({ g: 7 }); },
+      setG8: function () { self.setState({ g: 8 }); }, setG9: function () { self.setState({ g: 9 }); }, setG10: function () { self.setState({ g: 10 }); }, setG11: function () { self.setState({ g: 11 }); },
+      st0: s.lc === 0 ? 'on' : '', st1: s.lc === 1 ? 'on' : '', st2: s.lc === 2 ? 'on' : '', st3: s.lc === 3 ? 'on' : '', st4: s.lc === 4 ? 'on' : '', st5: s.lc === 5 ? 'on' : '',
+      pickS0: function () { self.setState({ lc: 0 }); }, pickS1: function () { self.setState({ lc: 1 }); }, pickS2: function () { self.setState({ lc: 2 }); },
+      pickS3: function () { self.setState({ lc: 3 }); }, pickS4: function () { self.setState({ lc: 4 }); }, pickS5: function () { self.setState({ lc: 5 }); },
+      lcNote: ['RECEIVED: stored and queued. Nothing read yet. Takes seconds.', 'EXTRACTING: a provider is reading the document. About 150 seconds typical.', 'VALIDATED: rules passed. Nobody has looked yet. Every value is still provisional.', 'REVIEW: a blocking rule failed. A person is needed, within the 4-hour commitment.', 'CONFIRMED: every value settled by a person. The only state a human causes.', 'ERROR: processing could not finish. Never silently lost; it surfaces in Exceptions.'][s.lc],
+      setVid: function (el) { if (el) { try { el.muted = true; el.loop = true; el.playsInline = true; el.controls = true; var pr = el.play && el.play(); if (pr && pr.catch) pr.catch(function () {}); } catch (e) {} } },
+      copy0: function () { self.copy(0, hexes[0]); }, copy1: function () { self.copy(1, hexes[1]); },
+      copy2: function () { self.copy(2, hexes[2]); }, copy3: function () { self.copy(3, hexes[3]); }
+    };
+  }
+}
+DCMount(Component);
+</script>
+</body>
+</html>
